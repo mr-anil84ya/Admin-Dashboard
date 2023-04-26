@@ -19,10 +19,12 @@ import ListItemText from "@mui/material/ListItemText";
 // import InboxIcon from "@mui/icons-material/MoveToInbox";
 // import MailIcon from "@mui/icons-material/Mail";
 import {
+  // AppBar,
   Avatar,
   Card,
   Grid,
   Icon,
+  // Link,
   ListSubheader,
   Paper,
   Stack,
@@ -33,11 +35,12 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import SendIcon from "@mui/icons-material/Send";
+// import SendIcon from "@mui/icons-material/Send";
 import DraftsIcon from "@mui/icons-material/Drafts";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SpeedIcon from "@mui/icons-material/Speed";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
+import {Link, Outlet} from "react-router-dom";
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -118,14 +121,15 @@ export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
-    setOpen(false);
-  };
-
-  const handleDrawerClose = () => {
     setOpen(true);
   };
 
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
   return (
+    <>
     <Box sx={{ display: "flex" }}>
       {/* <CssBaseline /> */}
       <AppBar position="fixed" open={open}>
@@ -133,7 +137,7 @@ export default function Dashboard() {
           <IconButton
             // color="inherit"
             aria-label="open drawer"
-            onClick={handleDrawerClose}
+            onClick={handleDrawerOpen}
             edge="start"
             sx={{
               marginRight: 5,
@@ -172,7 +176,7 @@ export default function Dashboard() {
             </Typography>
 
             <IconButton
-              onClick={handleDrawerOpen}
+              onClick={handleDrawerClose}
               sx={{ mr: 5, height: 40, m: "auto" }}
             >
               {theme.direction === "rtl" ? (
@@ -189,12 +193,15 @@ export default function Dashboard() {
           component="nav"
           aria-labelledby="nested-list-subheader"
         >
+          
+        
           <ListItemButton
             sx={{ borderRadius: 3, m: 1, height: 60, bgcolor: "skyblue" }}
           >
             <ListItemIcon>
               <SpeedIcon sx={{ color: "blue" }} />
             </ListItemIcon>
+            <Link to="/">
             <ListItemText
               primary={
                 <Typography
@@ -204,12 +211,14 @@ export default function Dashboard() {
                 </Typography>
               }
             />
+            </Link>
           </ListItemButton>
-
+          
           <ListItemButton sx={{ borderRadius: 3, m: 1, height: 60,bgcolor:'#E0FFFF' }}>
             <ListItemIcon>
               <DraftsIcon sx={{ color: "blue" }} />
             </ListItemIcon>
+            <Link to="/adduser" >
             <ListItemText
               primary={
                 <Typography
@@ -219,12 +228,14 @@ export default function Dashboard() {
                 </Typography>
               }
             />
+            </Link>
           </ListItemButton>
-
+             
           <ListItemButton sx={{ borderRadius: 3, m: 1, height: 60,bgcolor:'#E0FFFF' }}>
             <ListItemIcon>
               <DraftsIcon sx={{ color: "blue" }} />
             </ListItemIcon>
+            <Link to="/showuser">
             <ListItemText
               primary={
                 <Typography
@@ -234,12 +245,14 @@ export default function Dashboard() {
                 </Typography>
               }
             />
+            </Link>
           </ListItemButton>
-
+              
           <ListItemButton sx={{ borderRadius: 3, m: 1, height: 60,bgcolor:'#E0FFFF' }}>
             <ListItemIcon>
               <DraftsIcon sx={{ color: "blue" }} />
             </ListItemIcon>
+            <Link to="/userdetail">
             <ListItemText
               primary={
                 <Typography
@@ -249,6 +262,7 @@ export default function Dashboard() {
                 </Typography>
               }
             />
+            </Link>
           </ListItemButton>
         </List>
         <Divider />
@@ -297,7 +311,13 @@ export default function Dashboard() {
         }}
       >
         <DrawerHeader />
-        <Box
+        
+        {/* <Route index path="" component={Dashboard} /> */}
+        <div>
+        <Outlet />
+        </div>
+        
+        {/* <Box
           sx={{
             width: "100%",
             minHeight: 500,
@@ -385,8 +405,10 @@ export default function Dashboard() {
               </Card>
             </Grid>
           </Grid>
-        </Box>
+        </Box> */}
       </Box>
+     
     </Box>
+    </>
   );
 }
